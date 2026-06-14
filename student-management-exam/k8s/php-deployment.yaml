@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-php
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-php
+  template:
+    metadata:
+      labels:
+        app: student-php
+    spec:
+      containers:
+        - name: student-php
+          image: student-management:latest
+          imagePullPolicy: Never
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_NAME
+              value: exam_db
+            - name: DB_USER
+              value: root
+            - name: DB_PASS
+              value: root
+          ports:
+            - containerPort: 80
